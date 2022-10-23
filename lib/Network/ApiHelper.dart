@@ -1,10 +1,12 @@
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'package:pillar_app/model/Menu.dart';
+import 'package:pillar_app/model/Order.dart';
 
 class ApiHelper {
   // final String baseUrl = "http://127.0.0.1:8000/api";
-  final String baseUrl = "http://10.0.2.2:8000/api";
+  // final String baseUrl = "http://10.0.2.2:8000/api";
+  final String baseUrl = "http://pillarcaffee.xyz/public/api";
 
   Future signIn(String username, String password) async {
     var response = await http.post(
@@ -49,14 +51,23 @@ class ApiHelper {
     var uri = Uri.parse(url);
     var request = http.MultipartRequest("POST", uri);
     if (menu.foto != null) {
+      print("foto ada");
       var stream = http.ByteStream(menu.foto.openRead());
-      var multipartFile = http.MultipartFile(
-          'file', stream.cast(), menu.picLength,
+      var multipartFile = await http.MultipartFile(
+          'foto', stream.cast(), menu.picLength,
           filename: basename(menu.foto.path));
       request.files.add(multipartFile);
     }
     request.fields.addAll(menu.toAddMenu());
     var response = await request.send();
+    // print(response);
+    return response;
+  }
+
+  Future addOrder(Order order) async {
+    print(order.toAddOrder());
+    var response = await http.post(Uri.parse("$baseUrl/addorder"),
+        body: order.toAddOrder());
     return response;
   }
 }

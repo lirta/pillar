@@ -139,4 +139,16 @@ class _SelectMenuState extends State<SelectMenu>
     // TODO: implement onFaildGetMenu
     throw UnimplementedError();
   }
+
+  @override
+  onFaildAddOrder(Map data) {
+    // TODO: implement onFaildAddOrder
+    throw UnimplementedError();
+  }
+
+  @override
+  onSuccessAddOrder(Map data) {
+    // TODO: implement onSuccessAddOrder
+    throw UnimplementedError();
+  }
 }

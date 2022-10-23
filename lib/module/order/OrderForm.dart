@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pillar_app/base/BaseView.dart';
+import 'package:pillar_app/model/Order.dart';
 import 'package:pillar_app/module/order/SelectMenu.dart';
 import 'package:pillar_app/module/order/pettern/OrderPresenter.dart';
 import 'package:pillar_app/module/order/pettern/OrderView.dart';
@@ -22,10 +25,20 @@ class _OrderFormState extends State<OrderForm> with OrderView {
   TextEditingController serialCont = TextEditingController();
   TextEditingController partCont = TextEditingController();
   List<TextEditingController> qtycont = [];
-  List data_idMenu = List(), data_namaMenu = List(), dataQuan = List();
+  List data_idMenu = List(),
+      data_namaMenu = List(),
+      dataQuan = List(),
+      data_hargaMenu = List();
   bool isLogin = false, isFailed = false, btnLoad = false, autoValidate = false;
   int total = 0;
   final formKey = new GlobalKey<FormState>();
+  Order order;
+
+  void initState() {
+    super.initState();
+    orderPresener = new OrderPresener();
+    orderPresener.attachView(this);
+  }
 
   void selectMenu(String decoded) async {
     var information;
@@ -40,6 +53,7 @@ class _OrderFormState extends State<OrderForm> with OrderView {
           List data = information.toString().split("@");
           data_idMenu.add(data[0].toString());
           data_namaMenu.add(data[1].toString());
+          data_hargaMenu.add(data[2].toString());
           dataQuan.add(1);
           total = num.parse(data[2]) + total;
           qtycont.add(TextEditingController());
@@ -142,10 +156,6 @@ class _OrderFormState extends State<OrderForm> with OrderView {
         dataQuan[index] = qtyTemp;
         qtycont[index].text = qtyTemp.toString();
       });
-      // print("data tambah");
-      // print(dataSelectedSninId.toString());
-      // print(dataSelectedSerial.toString());
-      // print(dataSelectedQuantity.toString());
     }
   }
 
@@ -215,13 +225,13 @@ class _OrderFormState extends State<OrderForm> with OrderView {
     if (form.validate()) {
       form.save();
       setState(() {
-        //btnLoad = true;
+        // btnLoad = true;
       });
       sendData();
     } else {
       setState(() {
-        this.autoValidate = true;
-        //btnLoad = false;
+        // this.autoValidate = true;
+        btnLoad = false;
       });
     }
   }
@@ -229,43 +239,34 @@ class _OrderFormState extends State<OrderForm> with OrderView {
   void sendData() {
     if (this.mounted) {
       setState(() {
-        // if (widget.type != "edit") {
-        //   serial = Serial(
-        //     prodcode: dataSelectedSninId,
-        //     // prodname: dataSelectedSerial,
-        //     qty: dataSelectedQuantity,
-        //     mId: mId,
-        //     adminId: adminId,
-        //     // type: formView == "Customer" ? "customer" : "bo",
-        //     // desc: descCont.text,
-        //   );
-        //   print("data add");
-        //   print(serial.prodcode.toString());
-        //   // print(serial.prodname.toString());
-        //   print(serial.qty.toString());
-        //   print(serial.mId);
-        //   print(serial.adminId);
-        //   // print(serial.type);
-        //   print(serial.addSerialNumberOut());
-        //   serialOutPresenter.addSerialOut(serial);
-        // } else {
-        //   serial = Serial(
-        //     // sninId: dataSelectedSninId[0].toString(),
-        //     // serialnumber: serialCont.text.toString(),
-        //     // mId: mId,
-        //     adminId: adminId,
-        //     snoutId: widget.dataEdit[0]['snId'].toString(),
-        //     // desc: descCont.text.toString(),
-        //   );
-        //   print("data edit");
-        //   // print(serial.sninId);
-        //   // print(serial.serialnumber);
-        //   // print(serial.mId);
-        //   print(serial.adminId);
-        //   print(serial.snoutId);
-        //   print(serial.desc);
-        //   serialOutPresenter.editSerialOut(serial);
-        // }
+        if (widget.type != "edit") {
+          order = Order(
+            konsumen: nama.text,
+            idMenu: data_idMenu,
+            qty: dataQuan,
+            harga: data_hargaMenu,
+          );
+          // print("data order add");
+          print(order.toAddOrder());
+          orderPresener.addOrder(order);
+        } else {
+          //   serial = Serial(
+          //     // sninId: dataSelectedSninId[0].toString(),
+          //     // serialnumber: serialCont.text.toString(),
+          //     // mId: mId,
+          //     adminId: adminId,
+          //     snoutId: widget.dataEdit[0]['snId'].toString(),
+          //     // desc: descCont.text.toString(),
+          //   );
+          //   print("data edit");
+          //   // print(serial.sninId);
+          //   // print(serial.serialnumber);
+          //   // print(serial.mId);
+          //   print(serial.adminId);
+          //   print(serial.snoutId);
+          //   print(serial.desc);
+          //   serialOutPresenter.editSerialOut(serial);
+        }
       });
     }
   }
@@ -304,5 +305,24 @@ class _OrderFormState extends State<OrderForm> with OrderView {
   onFaildGetMenu(Map data) {
     // TODO: implement onFaildGetMenu
     throw UnimplementedError();
+  }
+
+  @override
+  onFaildAddOrder(Map data) {
+    // TODO: implement onFaildAddOrder
+    throw UnimplementedError();
+  }
+
+  @override
+  onSuccessAddOrder(Map data) {
+    // TODO: implement onSuccessAddOrder
+    // throw UnimplementedError();
+    if (this.mounted) {
+      setState(() {
+        btnLoad = false;
+      });
+      BaseView().displayToastLong(data['message'].toString());
+    }
+    Navigator.pop(context, true);
   }
 }

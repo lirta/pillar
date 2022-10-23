@@ -146,6 +146,110 @@ class OrderWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.grey)),
                       SizedBox(height: 6),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                      margin: EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        "Menu",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black87),
+                                      )),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                      margin: EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        "Jumlah",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black87),
+                                      )),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                      margin: EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        "Harga ",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black87),
+                                      )),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      // SizedBox(height: 6),
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: dataList[i]['menu'].length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                left: 16, right: 16, bottom: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            dataList[i]['menu'][index]['nama'],
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.black87),
+                                          )),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            dataList[i]['menu'][index]['qty']
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.black87),
+                                          )),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            "Rp " +
+                                                dataList[i]['menu'][index]
+                                                        ['harga']
+                                                    .toString(),
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.black87),
+                                          )),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -160,104 +264,16 @@ class OrderWidget {
                           ),
                           SizedBox(width: 16),
                           Expanded(
-                            child: Text(dataList[i]['total'].toString(),
+                            child: Text("Rp " + dataList[i]['total'].toString(),
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.black87)),
                           ),
-                          SizedBox(width: 16),
-                          // Expanded(
-                          //   child: Text(dataList[i]['orderTown'],
-                          //       overflow: TextOverflow.ellipsis,
-                          //       maxLines: 2,
-                          //       style: TextStyle(
-                          //           fontSize: 12.0,
-                          //           fontWeight: FontWeight.w700,
-                          //           color: Colors.black87)),
-                          // ),
-                          // SizedBox(width: 16),
-                          // Expanded(
-                          //   child: Text(dataList[i]['orderCountry'],
-                          //       style: TextStyle(
-                          //           fontSize: 12.0,
-                          //           fontWeight: FontWeight.w700,
-                          //           color: Colors.black87)),
-                          // ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
                           Expanded(
                             child: Container(
-                              margin: EdgeInsets.only(right: 8.0),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.teal,
-                                    padding: EdgeInsets.only(
-                                        top: 4.0,
-                                        bottom: 4.0,
-                                        left: 12.0,
-                                        right: 12.0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    )),
-                                onPressed: () async {
-                                  // if (dataList[i]['orderStatus'] ==
-                                  //         "Belum Lunas" &&
-                                  //     dataList[i]['orderButtonText'] ==
-                                  //         "Lunaskan") {
-                                  //   displayPopUpPaymentConfirmation(
-                                  //       context,
-                                  //       dataList[i]['orderName'],
-                                  //       dataList[i]['orderId'].toString());
-                                  //   print("pop up");
-                                  // } else if (dataList[i]['orderStatus'] ==
-                                  //         "Selesai" &&
-                                  //     dataList[i]['orderButtonText'] ==
-                                  //         "Detail") {
-                                  //   final information =
-                                  //       await Navigator.of(context)
-                                  //           .push(MaterialPageRoute(
-                                  //     builder: (_) => OrdersDetail(
-                                  //       orderId: dataList[i]['orderId']
-                                  //           .toString(),
-                                  //       access: access,
-                                  //     ),
-                                  //     settings:
-                                  //         RouteSettings(name: "Order Detail"),
-                                  //   ));
-                                  //   if (information != null) {}
-                                  // } else if (dataList[i]['orderStatus'] ==
-                                  //         "Lunas" &&
-                                  //     dataList[i]['orderButtonText'] ==
-                                  //         "Atur Pengiriman") {
-                                  //   final information =
-                                  //       await Navigator.of(context)
-                                  //           .push(MaterialPageRoute(
-                                  //     builder: (_) => OrdersShipment(
-                                  //       dataList: dataList[i],
-                                  //     ),
-                                  //     settings: RouteSettings(
-                                  //         name: "Order Shipment Form"),
-                                  //   ));
-                                  //   if (information != null) {
-                                  //     onRefresh();
-                                  //     }
-                                  //   } else {
-                                  //     BaseView()
-                                  //         .displayToast("Under development");
-                                  //   }
-                                },
-                                child: Text(
-                                    dataList[i]['orderButtonText'].toString(),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 11)),
-                              ),
+                              height: 1.0,
+                              color: Colors.black,
                             ),
                           ),
                         ],

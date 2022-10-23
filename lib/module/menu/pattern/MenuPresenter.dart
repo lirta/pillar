@@ -57,12 +57,14 @@ class MenuPresenter extends BasePresenter<MenuView> {
   Future addMenu(Menu menu) async {
     print("pre product");
     print(menu.toAddMenu());
+    print(menu.foto);
     checkViewAttached();
     var response = await appDataManager.apiHelper.addMenu(menu);
     response.stream.transform(utf8.decoder).listen((value) async {
       // print(value);
       data = await json.decode(value);
       print("masuk sini add product");
+      print(data);
       if (NetworkUtils.isReqSuccessBody(value)) {
         isViewAttached ? getView().onSuccessAddMenu(data) : null;
       } else {

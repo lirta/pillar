@@ -111,4 +111,16 @@ class _OrderMainState extends State<OrderMain>
     // TODO: implement onFaildGetMenu
     throw UnimplementedError();
   }
+
+  @override
+  onFaildAddOrder(Map data) {
+    // TODO: implement onFaildAddOrder
+    throw UnimplementedError();
+  }
+
+  @override
+  onSuccessAddOrder(Map data) {
+    // TODO: implement onSuccessAddOrder
+    throw UnimplementedError();
+  }
 }

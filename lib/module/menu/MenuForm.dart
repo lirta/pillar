@@ -152,8 +152,8 @@ class _MenuFormState extends State<MenuForm> with MenuView {
           foto: _fileImage,
           picLength: _fileLength,
         );
-        print("product");
-        print(menudata);
+        // print("product");
+        // print(menudata);
       });
 
       if (widget.type != "edit") {

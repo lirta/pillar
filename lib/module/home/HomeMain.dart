@@ -40,7 +40,7 @@ class _HomeMainState extends State<HomeMain>
       setState(() {
         user = User.fromJson(data['message']);
         if (user.foto.isNotEmpty) {
-          userPic = "http://10.0.2.2:8000/foto_kariawan" +
+          userPic = "https://pillarcaffee.xyz/foto_kariawan" +
               "/" +
               data['message']['foto'];
         }

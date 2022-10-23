@@ -119,63 +119,186 @@ Widget displayBoxProfile(
 }
 
 Widget displayBoxFirstMenu(BuildContext context) {
-  return Container(
-    color: Colors.white,
-    child: Material(
-      type: MaterialType.transparency,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => MenuMain(),
-                    settings: RouteSettings(name: "Menu")));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset("assets/images/m.jpg", width: 45, height: 45),
-                    SizedBox(height: 5),
-                    Text(
-                      "Menu",
-                      style: TextStyle(fontSize: 12, color: Colors.black),
-                    )
-                  ],
+  return Padding(
+    padding: EdgeInsets.symmetric(
+      horizontal: 24,
+    ),
+    child: Column(
+      children: [
+        Container(
+          // color: Colors.blue[200],
+          decoration: BoxDecoration(
+              color: Colors.blue[200],
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black54,
+                    offset: Offset(0.0, 4.0),
+                    blurRadius: 6.0)
+              ]),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => MenuMain(),
+                  settings: RouteSettings(name: "Menu")));
+            },
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      // padding: EdgeInsets.all(10),
+                      width: 130,
+                      height: 110,
+                      child: Image.asset(
+                        "assets/images/gambarmenu.png",
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  "Menu",
+                  style: TextStyle(fontSize: 18),
+                )
+              ],
             ),
           ),
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => OrderMain(),
-                    settings: RouteSettings(name: "Menu")));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset("assets/images/m.jpg", width: 70, height: 45),
-                    SizedBox(height: 5),
-                    Text(
-                      "Order",
-                      style: TextStyle(fontSize: 12, color: Colors.black),
-                    )
-                  ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+          // color: Colors.blue[200],
+          decoration: BoxDecoration(
+              color: Colors.blue[200],
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black54,
+                    offset: Offset(0.0, 4.0),
+                    blurRadius: 6.0)
+              ]),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => OrderMain(),
+                  settings: RouteSettings(name: "Order")));
+            },
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      // padding: EdgeInsets.all(10),
+                      width: 130,
+                      height: 110,
+                      child: Image.asset(
+                        "assets/images/order.png",
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  "Order",
+                  style: TextStyle(fontSize: 18),
+                )
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
+  // return Container(
+  //   color: Colors.white,
+  //   child: Material(
+  //     type: MaterialType.transparency,
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //       children: <Widget>[
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.of(context).push(MaterialPageRoute(
+  //                 builder: (_) => MenuMain(),
+  //                 settings: RouteSettings(name: "Menu")));
+  //           },
+  //           child: Padding(
+  //             padding: const EdgeInsets.symmetric(horizontal: 24),
+  //             child: Container(
+  //               margin: EdgeInsets.only(top: 20),
+  //               padding: EdgeInsets.all(16),
+  //               decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(12),
+  //                   color: Colors.blueGrey[300],
+  //                   boxShadow: [
+  //                     BoxShadow(
+  //                         offset: Offset(0, 17),
+  //                         blurRadius: 23,
+  //                         spreadRadius: -13,
+  //                         color: Colors.black54)
+  //                   ]),
+  //               height: 70,
+  //               width: 150,
+  //               child: Center(
+  //                 child: Text(
+  //                   "Menu",
+  //                   style: TextStyle(
+  //                     fontSize: 25,
+  //                     fontWeight: FontWeight.w400,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           width: 20,
+  //         ),
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.of(context).push(MaterialPageRoute(
+  //                 builder: (_) => OrderMain(),
+  //                 settings: RouteSettings(name: "Menu")));
+  //           },
+  //           child: Container(
+  //             margin: EdgeInsets.only(top: 20),
+  //             padding:
+  //                 EdgeInsets.only(top: 10, left: 12, bottom: 14, right: 20),
+  //             decoration: BoxDecoration(
+  //                 borderRadius: BorderRadius.circular(12),
+  //                 color: Colors.blueGrey[300],
+  //                 boxShadow: [
+  //                   BoxShadow(
+  //                       offset: Offset(0, 17),
+  //                       blurRadius: 23,
+  //                       spreadRadius: -13,
+  //                       color: Colors.black45)
+  //                 ]),
+  //             height: 70,
+  //             width: 150,
+  //             child: Center(
+  //               child: Text(
+  //                 "Orders",
+  //                 style: TextStyle(
+  //                   fontSize: 25,
+  //                   fontWeight: FontWeight.w400,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   ),
+  // );
 }

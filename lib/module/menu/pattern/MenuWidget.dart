@@ -60,7 +60,7 @@ Widget displayCatList(BuildContext context, dataMenu) {
                                                 width: 150,
                                                 height: 150,
                                                 child: Image.network(
-                                                    "http://10.0.2.2:8000/foto_menu/" +
+                                                    "https://pillarcaffee.xyz/foto_menu/" +
                                                         dataMenu['menu'][index]
                                                             ['foto']),
                                               ),
